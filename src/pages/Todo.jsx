@@ -33,7 +33,11 @@ const Todo = ({items,setItems,deleteItem}) =>{
     function addItem()
     {
         if(!newItem){
-            return alert("Error")
+            return alert("Enter the element")
+        }
+
+        if(!newType){
+            return alert("Enter the type")
         }
 
         const item = {
@@ -54,6 +58,11 @@ const Todo = ({items,setItems,deleteItem}) =>{
           }
           return item
         })
+
+        if(!editText){
+            return alert("Enter the changes")
+        }
+
         setItems(updatedItem)
         setItemEdit(null)
     }
