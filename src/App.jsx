@@ -15,13 +15,13 @@ const App = () => {
   }
   return (
     <BrowserRouter>
-    <Header />
-    <Routes>
-      <Route path="/todo" element={<Todo items={items} setItems={setItems} deleteItem={deleteItem}/>}/>
-      <Route path="/events" element={<Events itemsEvent={items} deleteItemEvent={deleteItem}/>}/>
-      <Route path="/reminder" element={<Reminder itemsReminder={items} deleteItemReminder={deleteItem}/>}/>
-      <Route path="/task" element={<Task itemsTask={items} deleteItemTask={deleteItem}/>}/>
-    </Routes>
+      <Header />
+        <Routes>
+          <Route path="/todo" element={<Todo items={items} setItems={setItems} deleteItem={deleteItem}/>}/>
+          <Route path="/events" element={<Events itemsEvent={items} deleteItemEvent={deleteItem}/>}/>
+          <Route path="/reminder" element={<Reminder itemsReminder={items} deleteItemReminder={deleteItem}/>}/>
+          <Route path="/task" element={<Task itemsTask={items} deleteItemTask={deleteItem}/>}/>
+        </Routes>
     </BrowserRouter>
   );
 }

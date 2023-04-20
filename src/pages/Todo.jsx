@@ -1,12 +1,37 @@
 import React, { useState}from "react"
-
+import TodoItem from "../componets/TodoItem";
+import { Button, InputLabel } from "@material-ui/core"
+import {TextField} from "@material-ui/core";
+import { MenuItem} from "@material-ui/core";
+import {FormControl} from "@material-ui/core";
+import {Select} from "@material-ui/core";
+import {makeStyles} from "@material-ui/core";
 const Todo = ({items,setItems,deleteItem}) =>{
     const [newType, setNewType] = useState("")
     const [newItem, setNewItem] = useState("")
     const [itemEdit, setItemEdit] = useState(null);
     const [editText, setEditText] = useState("");
 
-    function addItem(){
+    const useStyles = makeStyles((theme) => ({
+        formControl: {
+            marginTop: 15,
+            minWidth: 120,
+        },   
+        btn:{
+            marginTop: 15,
+            marginBottom: 15
+        },
+        todoItem:{
+            marginTop: 15
+        }
+    }));
+    
+    const classes = useStyles()
+
+
+
+    function addItem()
+    {
         if(!newItem){
             return alert("Error")
         }
@@ -31,7 +56,7 @@ const Todo = ({items,setItems,deleteItem}) =>{
         })
         setItems(updatedItem)
         setItemEdit(null)
-      }
+    }
     
     
     return (
@@ -40,46 +65,34 @@ const Todo = ({items,setItems,deleteItem}) =>{
                 <div className="todo_block">
                     <div className="todo_main">
                         <div className="todo_content">
-                            <h1>Todo список</h1>
-                                <input
-                                    type="text" 
-                                    placeholder="Введите элемент"
+                            <h1>Todo List</h1>
+                                <TextField 
+                                    id="outlined-basic" 
+                                    label="Input item" 
+                                    variant="outlined" 
                                     value={newItem}
-                                    onChange={(e)=>setNewItem(e.target.value)}
+                                    onChange={(e) => setNewItem(e.target.value)}
                                 />
-                                <select value={newType} onChange={(e)=>setNewType(e.target.value)} >
-                                    <option >---Выберете тип---</option>
-                                    <option value="reminder">Напоминание</option>
-                                    <option value="event">Мероприятие</option>
-                                    <option value="task">Задача</option>
-                                </select>
-                                <button onClick={(e)=>addItem()}>Добавить</button>
+                                <FormControl variant="outlined" className={classes.formControl}>
+                                    <InputLabel id="labelselect">Select type</InputLabel>
+                                    <Select
+                                        labelId="labelselect"
+                                        id="labelselect"
+                                        value={newType}
+                                        onChange={(e) => setNewType(e.target.value)}
+                                        label="Select type"
+                                        >
+                                        <MenuItem value="">
+                                            <em>None</em>
+                                        </MenuItem>
+                                        <MenuItem value="event">Event</MenuItem>
+                                        <MenuItem value="reminder">Reminder</MenuItem>
+                                        <MenuItem value="task">Task</MenuItem>
+                                    </Select>
+                                </FormControl>
+                                <Button className={classes.btn} variant="contained" color="primary" onClick={(e)=>addItem()}>Add item</Button>
+                                <TodoItem itemEdit={itemEdit} setEditText={setEditText} deleteItem={deleteItem} editItem={editItem} items={items} setItemEdit={setItemEdit} />
                                
-                                {
-                                    items.map(item =>(
-
-                                            <span className="page_text" key={item.id}>
-                                            {item.id === itemEdit
-                                            ? 
-                                            (<input
-                                                type="text"
-                                                onChange={(e) => setEditText(e.target.value)}
-                                            />) 
-                                            : 
-                                            (<p>{item.value}</p>)
-                                            }
-                                            {
-                                            item.id === itemEdit 
-                                            ? 
-                                            (<button onClick={() => editItem(item.id)}>Сохранить</button>) 
-                                            : 
-                                            (<button onClick={() => setItemEdit(item.id)}>Редактировать</button>)
-                                            }
-                                            <button onClick={() => deleteItem(item.id)}>Удалить</button>
-                                            </span>
-                                        
-                                    ))
-                                }
                         </div>
                     </div>    
                 </div>

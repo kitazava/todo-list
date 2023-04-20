@@ -1,0 +1,6 @@
+  {/* <select value={newType} onChange={(e)=>setNewType(e.target.value)} >
+                                    <option>---Change type---</option>
+                                    <option value="reminder">Reminder</option>
+                                    <option value="event">Event</option>
+                                    <option value="task">Task</option>
+                                </select> */}
