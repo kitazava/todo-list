@@ -48,6 +48,7 @@ const Todo = ({items,setItems,deleteItem}) =>{
 
         setItems([...items,item])
         setNewItem("")
+        setNewType("")
 
     }
 
